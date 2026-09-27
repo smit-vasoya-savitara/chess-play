@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Cinzel', serif;
+    background-color: #0c0e11;
+    color: #e2e2e6;
+  }
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-geist {
+  font-family: 'Geist', sans-serif;
+}
+
+/* Chiaroscuro & Stone Textures */
+.stone-slab {
+  background: linear-gradient(145deg, #1e2023 0%, #111316 100%);
+  box-shadow: inset 0 1px 1px rgba(212, 175, 55, 0.15), 0 16px 36px rgba(0, 0, 0, 0.85);
+}
+
+.stone-bevel {
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.05), inset 0 -3px 6px rgba(0, 0, 0, 0.9);
+}
+
+.mana-pulse {
+  animation: manaGaze 3s ease-in-out infinite alternate;
+}
+
+@keyframes manaGaze {
+  0% { box-shadow: 0 0 12px rgba(56, 189, 248, 0.25), inset 0 0 8px rgba(56, 189, 248, 0.2); }
+  100% { box-shadow: 0 0 28px rgba(56, 189, 248, 0.7), inset 0 0 14px rgba(56, 189, 248, 0.4); }
+}
+
+.arcane-sigil {
+  animation: sigilSpin 24s linear infinite;
+}
+
+@keyframes sigilSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.lightning-crack {
+  animation: flashArc 2.5s infinite ease;
+}
+
+@keyframes flashArc {
+  0%, 88%, 100% { opacity: 0.15; }
+  92%, 96% { opacity: 1; filter: drop-shadow(0 0 8px #38bdf8); }
+}
+
+.brass-btn {
+  background: linear-gradient(180deg, #f2ca50 0%, #997c23 100%);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.brass-btn:hover {
+  background: linear-gradient(180deg, #ffe088 0%, #b8932b 100%);
+  box-shadow: 0 0 18px rgba(242, 202, 80, 0.5);
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111316;
+}
+::-webkit-scrollbar-thumb {
+  background: #333538;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4d4635;
+}

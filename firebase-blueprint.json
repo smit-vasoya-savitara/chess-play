@@ -1,0 +1,59 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Registered player profile with ratings, house crest, and dueling statistics.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique Firebase Auth user ID." },
+        "displayName": { "type": "string", "maxLength": 100, "description": "Display name of the player." },
+        "email": { "type": "string", "format": "email", "maxLength": 200, "description": "User email address." },
+        "photoURL": { "type": "string", "maxLength": 500, "description": "Avatar photo URL." },
+        "house": { "type": "string", "enum": ["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"], "description": "Hogwarts dueling house affiliation." },
+        "rating": { "type": "number", "description": "Current chess Elo rating." },
+        "peakRating": { "type": "number", "description": "Highest achieved Elo rating." },
+        "tier": { "type": "string", "enum": ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Master", "Grandmaster"], "description": "Ranked tier." },
+        "division": { "type": "number", "description": "Division level from 1 to 4." },
+        "gamesPlayed": { "type": "number", "description": "Total completed games." },
+        "wins": { "type": "number", "description": "Total victories." },
+        "losses": { "type": "number", "description": "Total defeats." },
+        "draws": { "type": "number", "description": "Total drawn matches." },
+        "winStreak": { "type": "number", "description": "Current win streak." },
+        "createdAt": { "type": "string", "description": "Account registration timestamp." },
+        "updatedAt": { "type": "string", "description": "Last updated timestamp." }
+      },
+      "required": ["uid", "displayName", "email", "rating"]
+    },
+    "Match": {
+      "title": "Match Record",
+      "description": "Completed chess duel game record with PGN notation, result, and accuracy.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique match identifier." },
+        "userId": { "type": "string", "description": "Player UID who completed the match." },
+        "opponentName": { "type": "string", "maxLength": 100, "description": "Opponent player or bot name." },
+        "opponentElo": { "type": "number", "description": "Opponent rating." },
+        "opponentHouse": { "type": "string", "maxLength": 50, "description": "Opponent house." },
+        "playerColor": { "type": "string", "enum": ["w", "b"], "description": "Player piece color." },
+        "result": { "type": "string", "enum": ["win", "loss", "draw"], "description": "Game outcome." },
+        "reason": { "type": "string", "maxLength": 100, "description": "Victory/draw reason e.g. Checkmate." },
+        "pgn": { "type": "string", "maxLength": 10000, "description": "Full PGN move notation." },
+        "movesCount": { "type": "number", "description": "Total plies in game." },
+        "ratingDelta": { "type": "number", "description": "Elo rating change." },
+        "playerAccuracy": { "type": "number", "description": "Player accuracy score 0-100%." },
+        "createdAt": { "type": "string", "description": "Match completion timestamp." }
+      },
+      "required": ["userId", "opponentName", "result", "pgn"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profile documents stored by auth UID."
+    },
+    "/users/{userId}/matches/{matchId}": {
+      "schema": { "$ref": "#/entities/Match" },
+      "description": "Subcollection of match history records for a specific player."
+    }
+  }
+}
